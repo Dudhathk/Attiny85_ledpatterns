@@ -1,0 +1,337 @@
+
+attiny_85_blink_with_studio.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000188  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000008  00800060  00000188  000001fc  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .stab         000006cc  00000000  00000000  00000204  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000090  00000000  00000000  000008d0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 00000020  00000000  00000000  00000960  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_pubnames 0000001b  00000000  00000000  00000980  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   0000028f  00000000  00000000  0000099b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000017f  00000000  00000000  00000c2a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   000002ce  00000000  00000000  00000da9  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000020  00000000  00000000  00001078  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000014f  00000000  00000000  00001098  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000098  00000000  00000000  000011e7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_pubtypes 00000038  00000000  00000000  0000127f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000060  00000000  00000000  000012b7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0e c0       	rjmp	.+28     	; 0x1e <__ctors_end>
+   2:	20 c0       	rjmp	.+64     	; 0x44 <__bad_interrupt>
+   4:	1f c0       	rjmp	.+62     	; 0x44 <__bad_interrupt>
+   6:	1e c0       	rjmp	.+60     	; 0x44 <__bad_interrupt>
+   8:	1d c0       	rjmp	.+58     	; 0x44 <__bad_interrupt>
+   a:	1c c0       	rjmp	.+56     	; 0x44 <__bad_interrupt>
+   c:	1b c0       	rjmp	.+54     	; 0x44 <__bad_interrupt>
+   e:	1a c0       	rjmp	.+52     	; 0x44 <__bad_interrupt>
+  10:	19 c0       	rjmp	.+50     	; 0x44 <__bad_interrupt>
+  12:	18 c0       	rjmp	.+48     	; 0x44 <__bad_interrupt>
+  14:	17 c0       	rjmp	.+46     	; 0x44 <__bad_interrupt>
+  16:	16 c0       	rjmp	.+44     	; 0x44 <__bad_interrupt>
+  18:	15 c0       	rjmp	.+42     	; 0x44 <__bad_interrupt>
+  1a:	14 c0       	rjmp	.+40     	; 0x44 <__bad_interrupt>
+  1c:	13 c0       	rjmp	.+38     	; 0x44 <__bad_interrupt>
+
+0000001e <__ctors_end>:
+  1e:	11 24       	eor	r1, r1
+  20:	1f be       	out	0x3f, r1	; 63
+  22:	cf e5       	ldi	r28, 0x5F	; 95
+  24:	d2 e0       	ldi	r29, 0x02	; 2
+  26:	de bf       	out	0x3e, r29	; 62
+  28:	cd bf       	out	0x3d, r28	; 61
+
+0000002a <__do_copy_data>:
+  2a:	10 e0       	ldi	r17, 0x00	; 0
+  2c:	a0 e6       	ldi	r26, 0x60	; 96
+  2e:	b0 e0       	ldi	r27, 0x00	; 0
+  30:	e8 e8       	ldi	r30, 0x88	; 136
+  32:	f1 e0       	ldi	r31, 0x01	; 1
+  34:	02 c0       	rjmp	.+4      	; 0x3a <__CCP__+0x6>
+  36:	05 90       	lpm	r0, Z+
+  38:	0d 92       	st	X+, r0
+  3a:	a8 36       	cpi	r26, 0x68	; 104
+  3c:	b1 07       	cpc	r27, r17
+  3e:	d9 f7       	brne	.-10     	; 0x36 <__CCP__+0x2>
+  40:	02 d0       	rcall	.+4      	; 0x46 <main>
+  42:	a0 c0       	rjmp	.+320    	; 0x184 <_exit>
+
+00000044 <__bad_interrupt>:
+  44:	dd cf       	rjmp	.-70     	; 0x0 <__vectors>
+
+00000046 <main>:
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+  46:	8f 92       	push	r8
+  48:	9f 92       	push	r9
+  4a:	af 92       	push	r10
+  4c:	bf 92       	push	r11
+  4e:	df 92       	push	r13
+  50:	ef 92       	push	r14
+  52:	ff 92       	push	r15
+  54:	0f 93       	push	r16
+  56:	1f 93       	push	r17
+  58:	df 93       	push	r29
+  5a:	cf 93       	push	r28
+  5c:	cd b7       	in	r28, 0x3d	; 61
+  5e:	de b7       	in	r29, 0x3e	; 62
+  60:	28 97       	sbiw	r28, 0x08	; 8
+  62:	0f b6       	in	r0, 0x3f	; 63
+  64:	f8 94       	cli
+  66:	de bf       	out	0x3e, r29	; 62
+  68:	0f be       	out	0x3f, r0	; 63
+  6a:	cd bf       	out	0x3d, r28	; 61
+	int delay_var = 500;
+	int pin_numbers[] = {1,2,4,16};
+  6c:	de 01       	movw	r26, r28
+  6e:	11 96       	adiw	r26, 0x01	; 1
+  70:	e0 e6       	ldi	r30, 0x60	; 96
+  72:	f0 e0       	ldi	r31, 0x00	; 0
+  74:	88 e0       	ldi	r24, 0x08	; 8
+  76:	01 90       	ld	r0, Z+
+  78:	0d 92       	st	X+, r0
+  7a:	81 50       	subi	r24, 0x01	; 1
+  7c:	e1 f7       	brne	.-8      	; 0x76 <main+0x30>
+  7e:	fe 01       	movw	r30, r28
+  80:	31 96       	adiw	r30, 0x01	; 1
+*/
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+  82:	9f 01       	movw	r18, r30
+  84:	ce 01       	movw	r24, r28
+  86:	09 96       	adiw	r24, 0x09	; 9
+{
+	int delay_var = 500;
+	int pin_numbers[] = {1,2,4,16};
+	for(int i=0; i<4; i++){
+		DDRB |= pin_numbers[i];
+  88:	57 b3       	in	r21, 0x17	; 23
+  8a:	40 81       	ld	r20, Z
+  8c:	32 96       	adiw	r30, 0x02	; 2
+  8e:	45 2b       	or	r20, r21
+  90:	47 bb       	out	0x17, r20	; 23
+
+int main(void)
+{
+	int delay_var = 500;
+	int pin_numbers[] = {1,2,4,16};
+	for(int i=0; i<4; i++){
+  92:	e8 17       	cp	r30, r24
+  94:	f9 07       	cpc	r31, r25
+  96:	c1 f7       	brne	.-16     	; 0x88 <main+0x42>
+  98:	80 e0       	ldi	r24, 0x00	; 0
+  9a:	90 e0       	ldi	r25, 0x00	; 0
+		DDRB |= pin_numbers[i];
+	}		
+    /*DDRB |= pin_number;   */ 
+    while(1){
+		for(int i=0; i<4; i++){
+			PORTB ^= pin_numbers[i];
+  9c:	8e 01       	movw	r16, r28
+  9e:	0f 5f       	subi	r16, 0xFF	; 255
+  a0:	1f 4f       	sbci	r17, 0xFF	; 255
+	for(int i=0; i<4; i++){
+		DDRB |= pin_numbers[i];
+	}		
+    /*DDRB |= pin_number;   */ 
+    while(1){
+		for(int i=0; i<4; i++){
+  a2:	0f 2e       	mov	r0, r31
+  a4:	f9 e0       	ldi	r31, 0x09	; 9
+  a6:	af 2e       	mov	r10, r31
+  a8:	bb 24       	eor	r11, r11
+  aa:	f0 2d       	mov	r31, r0
+  ac:	ac 0e       	add	r10, r28
+  ae:	bd 1e       	adc	r11, r29
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  b0:	0f 2e       	mov	r0, r31
+  b2:	f3 e0       	ldi	r31, 0x03	; 3
+  b4:	8f 2e       	mov	r8, r31
+  b6:	99 24       	eor	r9, r9
+  b8:	f0 2d       	mov	r31, r0
+  ba:	a0 e0       	ldi	r26, 0x00	; 0
+  bc:	b0 e0       	ldi	r27, 0x00	; 0
+  be:	17 c0       	rjmp	.+46     	; 0xee <main+0xa8>
+			PORTB ^= pin_numbers[i];
+  c0:	f8 b2       	in	r15, 0x18	; 24
+  c2:	fc 01       	movw	r30, r24
+  c4:	ee 0f       	add	r30, r30
+  c6:	ff 1f       	adc	r31, r31
+  c8:	e0 0f       	add	r30, r16
+  ca:	f1 1f       	adc	r31, r17
+  cc:	e0 81       	ld	r30, Z
+  ce:	fe 2f       	mov	r31, r30
+  d0:	ff 25       	eor	r31, r15
+  d2:	f8 bb       	out	0x18, r31	; 24
+  d4:	4f e9       	ldi	r20, 0x9F	; 159
+  d6:	56 e8       	ldi	r21, 0x86	; 134
+  d8:	61 e0       	ldi	r22, 0x01	; 1
+  da:	41 50       	subi	r20, 0x01	; 1
+  dc:	50 40       	sbci	r21, 0x00	; 0
+  de:	60 40       	sbci	r22, 0x00	; 0
+  e0:	e1 f7       	brne	.-8      	; 0xda <main+0x94>
+  e2:	00 c0       	rjmp	.+0      	; 0xe4 <main+0x9e>
+  e4:	00 00       	nop
+			_delay_ms(delay_var);
+			PORTB ^= pin_numbers[i];
+  e6:	f8 b3       	in	r31, 0x18	; 24
+  e8:	ef 27       	eor	r30, r31
+  ea:	e8 bb       	out	0x18, r30	; 24
+	for(int i=0; i<4; i++){
+		DDRB |= pin_numbers[i];
+	}		
+    /*DDRB |= pin_number;   */ 
+    while(1){
+		for(int i=0; i<4; i++){
+  ec:	01 96       	adiw	r24, 0x01	; 1
+  ee:	84 30       	cpi	r24, 0x04	; 4
+  f0:	91 05       	cpc	r25, r1
+  f2:	34 f3       	brlt	.-52     	; 0xc0 <main+0x7a>
+  f4:	f5 01       	movw	r30, r10
+			PORTB ^= pin_numbers[i];
+			_delay_ms(delay_var);
+			PORTB ^= pin_numbers[i];
+		}	
+		for(int i=3; i > -1; i--){
+			PORTB ^= pin_numbers[i];
+  f6:	98 b3       	in	r25, 0x18	; 24
+  f8:	32 97       	sbiw	r30, 0x02	; 2
+  fa:	80 81       	ld	r24, Z
+  fc:	98 27       	eor	r25, r24
+  fe:	98 bb       	out	0x18, r25	; 24
+ 100:	4f e9       	ldi	r20, 0x9F	; 159
+ 102:	56 e8       	ldi	r21, 0x86	; 134
+ 104:	61 e0       	ldi	r22, 0x01	; 1
+ 106:	41 50       	subi	r20, 0x01	; 1
+ 108:	50 40       	sbci	r21, 0x00	; 0
+ 10a:	60 40       	sbci	r22, 0x00	; 0
+ 10c:	e1 f7       	brne	.-8      	; 0x106 <main+0xc0>
+ 10e:	00 c0       	rjmp	.+0      	; 0x110 <main+0xca>
+ 110:	00 00       	nop
+			_delay_ms(delay_var);
+			PORTB ^= pin_numbers[i];
+ 112:	98 b3       	in	r25, 0x18	; 24
+ 114:	89 27       	eor	r24, r25
+ 116:	88 bb       	out	0x18, r24	; 24
+		for(int i=0; i<4; i++){
+			PORTB ^= pin_numbers[i];
+			_delay_ms(delay_var);
+			PORTB ^= pin_numbers[i];
+		}	
+		for(int i=3; i > -1; i--){
+ 118:	2e 17       	cp	r18, r30
+ 11a:	3f 07       	cpc	r19, r31
+ 11c:	61 f7       	brne	.-40     	; 0xf6 <main+0xb0>
+ 11e:	4f e9       	ldi	r20, 0x9F	; 159
+ 120:	56 e8       	ldi	r21, 0x86	; 134
+ 122:	61 e0       	ldi	r22, 0x01	; 1
+ 124:	41 50       	subi	r20, 0x01	; 1
+ 126:	50 40       	sbci	r21, 0x00	; 0
+ 128:	60 40       	sbci	r22, 0x00	; 0
+ 12a:	e1 f7       	brne	.-8      	; 0x124 <main+0xde>
+ 12c:	00 c0       	rjmp	.+0      	; 0x12e <main+0xe8>
+ 12e:	00 00       	nop
+ 130:	c4 01       	movw	r24, r8
+			_delay_ms(delay_var);
+			PORTB ^= pin_numbers[i];
+		}	
+		_delay_ms(delay_var);
+		for(int i=3; i > 0; i--){
+			PORTB ^= pin_numbers[0];
+ 132:	e8 b3       	in	r30, 0x18	; 24
+ 134:	e9 80       	ldd	r14, Y+1	; 0x01
+ 136:	ee 25       	eor	r30, r14
+ 138:	e8 bb       	out	0x18, r30	; 24
+			PORTB ^= pin_numbers[1];
+ 13a:	e8 b3       	in	r30, 0x18	; 24
+ 13c:	fb 80       	ldd	r15, Y+3	; 0x03
+ 13e:	ef 25       	eor	r30, r15
+ 140:	e8 bb       	out	0x18, r30	; 24
+			PORTB ^= pin_numbers[2];
+ 142:	e8 b3       	in	r30, 0x18	; 24
+ 144:	fd 81       	ldd	r31, Y+5	; 0x05
+ 146:	ef 27       	eor	r30, r31
+ 148:	e8 bb       	out	0x18, r30	; 24
+			PORTB ^= pin_numbers[3];
+ 14a:	d8 b2       	in	r13, 0x18	; 24
+ 14c:	ef 81       	ldd	r30, Y+7	; 0x07
+ 14e:	de 26       	eor	r13, r30
+ 150:	d8 ba       	out	0x18, r13	; 24
+ 152:	4f e9       	ldi	r20, 0x9F	; 159
+ 154:	56 e8       	ldi	r21, 0x86	; 134
+ 156:	61 e0       	ldi	r22, 0x01	; 1
+ 158:	41 50       	subi	r20, 0x01	; 1
+ 15a:	50 40       	sbci	r21, 0x00	; 0
+ 15c:	60 40       	sbci	r22, 0x00	; 0
+ 15e:	e1 f7       	brne	.-8      	; 0x158 <main+0x112>
+ 160:	00 c0       	rjmp	.+0      	; 0x162 <main+0x11c>
+ 162:	00 00       	nop
+			_delay_ms(delay_var);
+			PORTB ^= pin_numbers[0];
+ 164:	d8 b2       	in	r13, 0x18	; 24
+ 166:	ed 24       	eor	r14, r13
+ 168:	e8 ba       	out	0x18, r14	; 24
+			PORTB ^= pin_numbers[1];
+ 16a:	e8 b2       	in	r14, 0x18	; 24
+ 16c:	fe 24       	eor	r15, r14
+ 16e:	f8 ba       	out	0x18, r15	; 24
+			PORTB ^= pin_numbers[2];
+ 170:	f8 b2       	in	r15, 0x18	; 24
+ 172:	ff 25       	eor	r31, r15
+ 174:	f8 bb       	out	0x18, r31	; 24
+			PORTB ^= pin_numbers[3];
+ 176:	f8 b3       	in	r31, 0x18	; 24
+ 178:	ef 27       	eor	r30, r31
+ 17a:	e8 bb       	out	0x18, r30	; 24
+ 17c:	01 97       	sbiw	r24, 0x01	; 1
+			PORTB ^= pin_numbers[i];
+			_delay_ms(delay_var);
+			PORTB ^= pin_numbers[i];
+		}	
+		_delay_ms(delay_var);
+		for(int i=3; i > 0; i--){
+ 17e:	c9 f6       	brne	.-78     	; 0x132 <main+0xec>
+	for(int i=0; i<4; i++){
+		DDRB |= pin_numbers[i];
+	}		
+    /*DDRB |= pin_number;   */ 
+    while(1){
+		for(int i=0; i<4; i++){
+ 180:	cd 01       	movw	r24, r26
+ 182:	b5 cf       	rjmp	.-150    	; 0xee <main+0xa8>
+
+00000184 <_exit>:
+ 184:	f8 94       	cli
+
+00000186 <__stop_program>:
+ 186:	ff cf       	rjmp	.-2      	; 0x186 <__stop_program>

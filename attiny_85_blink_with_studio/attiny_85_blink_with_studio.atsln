@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# AvrStudio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "attiny_85_blink_with_studio", "attiny_85_blink_with_studio\attiny_85_blink_with_studio.cproj", "{9149EDB2-7EA0-4295-ABC4-2D49ECEC1AD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9149EDB2-7EA0-4295-ABC4-2D49ECEC1AD7}.Debug|AVR.ActiveCfg = Debug|AVR
+		{9149EDB2-7EA0-4295-ABC4-2D49ECEC1AD7}.Debug|AVR.Build.0 = Debug|AVR
+		{9149EDB2-7EA0-4295-ABC4-2D49ECEC1AD7}.Release|AVR.ActiveCfg = Release|AVR
+		{9149EDB2-7EA0-4295-ABC4-2D49ECEC1AD7}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
